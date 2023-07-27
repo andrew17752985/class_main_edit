@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -1082,7 +1083,7 @@ select:-webkit-autofill:focus {
   stroke: #EC008C;
 }
 .my-classes .my-classes__sort.spec.sorted-desc {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
   stroke: #EC008C;
 }
 .my-classes__row {
