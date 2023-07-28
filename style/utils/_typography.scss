@@ -786,3 +786,19 @@ select:-webkit-autofill:focus {
 .btn__primary .btn_icon {
   background-color: #fff
 }
+
+.btn__light {
+  color: #0c6db6;
+  border: 1px solid #0c6db6;
+  border-radius: 2px;
+  background: transparent
+}
+
+.btn__light:focus,.btn__light:hover {
+  color: #ec008c;
+  border-color: #ec008c
+}
+
+.btn__light:focus .btn_icon,.btn__light:hover .btn_icon {
+  background-color: #ec008c
+}

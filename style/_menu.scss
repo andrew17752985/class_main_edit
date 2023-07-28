@@ -1,0 +1,218 @@
+.main-menu {
+    position: fixed;
+    z-index: 300;
+    width: 100vw;
+    height: 100%;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+    min-height: fit-content
+}
+
+.main-menu__hidden {
+    pointer-events: none
+}
+
+.main-menu__hidden>.main-menu_background {
+    pointer-events: none;
+    opacity: 0
+}
+
+.main-menu__hidden .main-menu_panel {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%)
+}
+
+.main-menu_background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+    opacity: 1;
+    background-color: rgba(0,0,0,.5);
+    will-change: opacity
+}
+
+.main-menu_panel {
+    position: absolute;
+    z-index: 301;
+    overflow-y: scroll;
+    min-width: 320px;
+    height: 100%;
+    padding: 25px 50px 45px;
+    -webkit-transition: -webkit-transform .9s;
+    transition: -webkit-transform .9s;
+    transition: transform .9s;
+    transition: transform .9s,-webkit-transform .9s;
+    border-right: 1px solid #ededed;
+    background-color: #fff;
+    will-change: transform
+}
+
+.main-menu_close-btn {
+    width: 15px;
+    height: 15px;
+    border: none;
+    background-color: transparent;
+    background-image: url(/image/icons/close.svg);
+    background-repeat: no-repeat;
+    background-size: contain
+}
+
+.main-menu_close-btn:hover {
+    background-image: url(/image/icons/x-cross-hovered.svg);
+    cursor: pointer;
+}
+
+.main-menu_lang-switcher-slot {
+    position: absolute;
+    top: 25px;
+    right: 35px
+}
+
+.main-menu_logo {
+    margin-top: 33px
+}
+
+.main-menu_logo>a {
+    border: none
+}
+
+.main-menu_logo-img {
+    width: 230px;
+    height: 45px
+}
+
+.main-menu_menu {
+    margin-top: 37px
+}
+
+.main-menu_menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.main-menu_menu li {
+    display: block;
+    padding-bottom: 5px
+}
+
+.main-menu_menu li>a {
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none
+}
+
+.main-menu_menu li>a:hover {
+    color: #ec008c
+}
+
+.main-menu_premium-btn-slot {
+    margin-top: 43px
+}
+
+.main-menu_social-links-slot {
+    margin-top: 35px
+}
+
+.social-links__inverted .social-links_list>li>a .social-icon {
+    color: #fff
+}
+
+.social-links_title {
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-transform: uppercase
+}
+
+.social-links_list {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.social-links_list,.social-links_list>li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.social-links_list>li {
+    padding-right: 7px
+}
+
+.social-links_list>li>a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 28px;
+    height: 28px;
+    border: none
+}
+
+.social-links_list>li>a:focus .social-icon,.social-links_list>li>a:hover .social-icon {
+    background-color: #ec008c
+}
+
+.social-icon {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    background-color: #121921;
+    -webkit-mask-image: url(/image/icons/social-icon-background.svg);
+    mask-image: url(/img/icons/social-icon-background.svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain
+}
+
+.social-icon:focus .social-icon,.social-icon:hover .social-icon {
+    background-color: #ec008c
+}
+
+.social-icon:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: 50%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center
+}
+
+.social-icon:after,.social-icon__inverted {
+    background-color: #fff
+}
+
+.social-icon__inverted:after {
+    background-color: #000
+}
+
+.social-icon__facebook:after {
+    -webkit-mask-image: url(/img/icons/facebook-icon.svg);
+    mask-image: url(/img/icons/facebook-icon.svg)
+}
+
+.social-icon__pinterest:after {
+    -webkit-mask-image: url(/img/icons/pinterest-icon.svg);
+    mask-image: url(/img/icons/pinterest-icon.svg)
+}

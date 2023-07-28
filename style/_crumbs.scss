@@ -1,12 +1,17 @@
 .crumbs {
-  padding: 6px 0 20px;
+  
+
+  @include tablet-max {
+    padding: 8px 15px 20px;
+  }
 
   @include desktop {
-    padding: 6px 0 50px 58px;
+    padding: 10px 0 50px 58px;
   }
 
   &__list {
     display: flex;
+    gap: 1px;
   }
 
   &__link {

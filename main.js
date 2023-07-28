@@ -37,7 +37,7 @@ $(document).ready(function () {
   };
   
   let originalItemsOrder = [];
-  let lastSortColumn = null; // Зберігаємо ім'я останнього обраного стовпця сортування
+  let lastSortColumn = null;
   
   function sortList(sortBy) {
     const list = $(".my-classes__list");
@@ -47,11 +47,9 @@ $(document).ready(function () {
       originalItemsOrder = items.slice(0);
     }
   
-    // Перевірка, чи клікнули на інший стовпець сортування
     const isDifferentColumn = lastSortColumn !== sortBy;
     lastSortColumn = sortBy;
   
-    // Визначаємо наступний стан сортування для поточного стовпця
     if (sortStates[sortBy] === "none") {
       sortStates[sortBy] = "asc";
     } else if (sortStates[sortBy] === "asc") {
@@ -60,7 +58,6 @@ $(document).ready(function () {
       sortStates[sortBy] = "none";
     }
   
-    // Змінимо класи для <svg> іконки відповідно до стану сортування
     $(".my-classes__sort").removeClass("sorted-asc sorted-desc");
   
     const icon = $(this).find(".my-classes__sort");
@@ -70,7 +67,6 @@ $(document).ready(function () {
       icon.addClass("sorted-desc");
     }
   
-    // Виконуємо сортування тільки якщо стан сортування не "none" або якщо клікнули на інший стовпець сортування
     if (sortStates[sortBy] !== "none" || isDifferentColumn) {
       items.sort(function (a, b) {
         const aValue = $(a).find(sortBy).text();
@@ -87,12 +83,12 @@ $(document).ready(function () {
         list.append(item);
       });
     } else {
-      // Якщо стан сортування "none" і клікнули на той же стовпець сортування, відновлюємо оригінальний порядок
+
       $.each(originalItemsOrder, function (index, item) {
         list.append(item);
       });
       originalItemsOrder = [];
-      lastSortColumn = null; // Очищуємо ім'я останнього обраного стовпця сортування
+      lastSortColumn = null;
     }
   }
   
@@ -146,3 +142,18 @@ $(document).ready(function () {
     menuIcon.classList.toggle('opened');
     menu.classList.toggle('opened');
   }
+
+
+
+
+   const burgerButton = document.querySelector(".header_burger-btn");
+   const closeButton = document.querySelector(".main-menu_close-btn");
+   const mainMenu = document.querySelector(".main-menu");
+ 
+   burgerButton.addEventListener("click", function () {
+     mainMenu.classList.remove("main-menu__hidden");
+   });
+
+   closeButton.addEventListener("click", function () {
+     mainMenu.classList.add("main-menu__hidden");
+   });
