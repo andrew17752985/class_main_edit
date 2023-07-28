@@ -53,17 +53,18 @@
 }
 
 .main-menu_close-btn {
+    display: block;
     width: 15px;
     height: 15px;
     border: none;
     background-color: transparent;
-    background-image: url(/image/icons/close.svg);
+    background-image: url(../image/icons/close.svg);
     background-repeat: no-repeat;
     background-size: contain
 }
 
 .main-menu_close-btn:hover {
-    background-image: url(/image/icons/x-cross-hovered.svg);
+    background-image: url(../image/icons/x-cross-hovered.svg);
     cursor: pointer;
 }
 
