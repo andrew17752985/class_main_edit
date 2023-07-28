@@ -157,3 +157,44 @@ $(document).ready(function () {
    closeButton.addEventListener("click", function () {
      mainMenu.classList.add("main-menu__hidden");
    });
+
+
+
+   function calculateTotalTime() {
+    const timeLogs = [
+      { start: "19:58", end: "20:13" },
+      { start: "20:43", end: "21:08" },
+      { start: "16:00", end: "17:20" },
+      { start: "21:27", end: "23:36" },
+      { start: "10:09", end: "10:42" },
+      { start: "11:58", end: "13:00" },
+      { start: "13:40", end: "15:03" },
+      { start: "17:40", end: "19:03" },
+      { start: "21:05", end: "00:32" },
+      { start: "22:00", end: "00:00" },
+      { start: "22:39", end: "23:15" },
+      { start: "22:36", end: "23:00" },
+    ];
+  
+    let totalMinutes = 0;
+  
+    for (const timeLog of timeLogs) {
+      const [startHour, startMinute] = timeLog.start.split(":").map(Number);
+      const [endHour, endMinute] = timeLog.end.split(":").map(Number);
+  
+      let durationMinutes = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+  
+      if (durationMinutes < 0) {
+        durationMinutes += 24 * 60;
+      }
+  
+      totalMinutes += durationMinutes;
+    }
+  
+    const totalHours = Math.floor(totalMinutes / 60);
+    totalMinutes %= 60;
+  
+    alert(`Загальний час, витрачений на завдання: ${totalHours} годин ${totalMinutes} хвилин.`);
+  }
+  
+  calculateTotalTime();
