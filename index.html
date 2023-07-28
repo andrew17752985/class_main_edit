@@ -583,6 +583,64 @@
       </div>
     </div>
   </footer>
+  <script>
+    function calculateTotalTime() {
+      const timeLogs = [
+        { start: "19:58", end: "20:13" },
+        { start: "20:43", end: "21:08" },
+        { start: "16:00", end: "17:20" },
+        { start: "21:27", end: "23:36" },
+        { start: "10:09", end: "10:42" },
+        { start: "11:58", end: "13:00" },
+        { start: "13:40", end: "15:03" },
+        { start: "17:40", end: "19:03" },
+        { start: "21:05", end: "00:32" },
+        { start: "22:00", end: "00:00" },
+        { start: "22:39", end: "23:15" },
+        { start: "22:36", end: "23:00" },
+      ];
+  
+      let totalMinutes = 0;
+  
+      for (const timeLog of timeLogs) {
+        const [startHour, startMinute] = timeLog.start.split(":").map(Number);
+        const [endHour, endMinute] = timeLog.end.split(":").map(Number);
+  
+        let durationMinutes = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+  
+        if (durationMinutes < 0) {
+          durationMinutes += 24 * 60;
+        }
+  
+        totalMinutes += durationMinutes;
+      }
+  
+      const totalHours = Math.floor(totalMinutes / 60);
+      totalMinutes %= 60;
+  
+      const popupMessage = document.createElement("div");
+      popupMessage.innerHTML = `Загальний час, витрачений на завдання: ${totalHours} годин ${totalMinutes} хвилин. <br><a href="https://github.com/andrew17752985/class_main_edit/blob/main/timing.txt" target="_blank" style="text-decoration: underline; color: blue;">timing.txt</a>`;
+      popupMessage.style.position = "fixed";
+      popupMessage.style.top = "50%";
+      popupMessage.style.left = "50%";
+      popupMessage.style.transform = "translate(-50%, -50%)";
+      popupMessage.style.padding = "20px";
+      popupMessage.style.backgroundColor = "#fff";
+      popupMessage.style.border = "2px solid #ccc";
+      popupMessage.style.borderRadius = "8px";
+      popupMessage.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+      popupMessage.style.zIndex = "9999";
+      document.body.appendChild(popupMessage);
+  
+      document.addEventListener("click", function(event) {
+        if (!popupMessage.contains(event.target)) {
+          document.body.removeChild(popupMessage);
+        }
+      });
+    }
+  
+    calculateTotalTime();
+  </script>
   <script src="./main.js"></script>
 </body>
 </html>

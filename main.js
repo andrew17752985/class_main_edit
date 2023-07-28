@@ -195,6 +195,6 @@ $(document).ready(function () {
     totalMinutes %= 60;
   
     alert(`Загальний час, витрачений на завдання: ${totalHours} годин ${totalMinutes} хвилин.`);
-  }
+  }                 
   
   calculateTotalTime();
