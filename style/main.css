@@ -1459,6 +1459,7 @@ select:-webkit-autofill:focus {
 }
 
 .footer {
+  font-family: "Montserrat", sans-serif;
   margin-top: auto;
   padding: 50px 0 60px;
   background-color: #000;
@@ -1563,6 +1564,7 @@ select:-webkit-autofill:focus {
   border: none;
   border-radius: 4px 0 0 4px;
   background: #fff;
+  font-size: 16px;
 }
 
 .footer_copyright {
