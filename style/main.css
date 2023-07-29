@@ -1157,7 +1157,7 @@ select:-webkit-autofill:focus {
   width: 100%;
   height: 2px;
   background-color: #EC008C;
-  bottom: 0;
+  bottom: -2px;
 }
 @media screen and (min-width: 992px) {
   .my-classes__classes {
