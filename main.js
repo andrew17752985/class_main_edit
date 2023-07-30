@@ -2,6 +2,7 @@
 $(document).ready(function () {
   const myClasses = $(".sort");
   let activeElement = null;
+  let lastSaveClickTime = 0;
 
   function removeActiveClass() {
     if (activeElement) {
@@ -9,27 +10,111 @@ $(document).ready(function () {
     }
   }
 
-  if ($(window).width() <= 991) {
-    myClasses.on('click', function (e) {
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.my-classes__row').length) {
+      removeActiveClass();
+    }
+  });
+
+  function openModal($row) {
+    $('.my-classes__backdrop').addClass('visible');
+
+    // Обробник події для кнопки "Видалити" в модальному вікні
+    $('.my-classes__button-delete').off().on('click', function (event) {
+      event.preventDefault();
+      $row.remove();
+      $('.my-classes__backdrop').removeClass('visible');
+    });
+
+    // Обробник події для кнопки "Відміна" в модальному вікні
+    $('.my-classes__button-abolition').off().on('click', function (event) {
+      event.preventDefault();
+      $('.my-classes__backdrop').removeClass('visible');
+    });
+
+    // Обробник події для кнопки "Закрити" в модальному вікні
+    $('.my-classes__close').off().on('click', function (event) {
+      event.preventDefault();
+      $('.my-classes__backdrop').removeClass('visible');
+    });
+  }
+
+  myClasses.on('click', function (e) {
+    if (!$(e.target).closest('.my-classes__edit, .my-classes__delete').length) {
       removeActiveClass();
       $(this).addClass('active');
       activeElement = $(this);
-    });
+    }
+  });
 
-    $(".my-classes__edit").on('click', function (e) {
-      e.stopPropagation();
-      removeActiveClass();
-    });
+  $(".my-classes__edit").on('click', function (e) {
+    e.stopPropagation();
+    removeActiveClass();
+  });
 
-    $(".my-classes__delete").on('click', function (e) {
-      e.stopPropagation();
-      removeActiveClass();
-    });
-  }
+  $(".my-classes__delete").on('click', function (e) {
+    e.stopPropagation();
+    removeActiveClass();
+    openModal($(this).closest('.my-classes__row'));
+  });
+
+  $('.my-classes__save').click(function (event) {
+    event.preventDefault();
+    const currentTime = new Date().getTime();
+    if (currentTime - lastSaveClickTime < 300) {
+      return;
+    }
+    lastSaveClickTime = currentTime;
+
+    const $row = $(this).closest('.my-classes__row');
+    const $name = $row.find('.my-classes__name');
+    const $input = $row.find('.my-classes__input');
+    const $editLink = $row.find('.my-classes__edit');
+    const $saveLink = $(this);
+
+    $name.text($input.val().trim()).removeClass('hidden');
+    $input.addClass('hidden');
+    setTimeout(function () {
+      $saveLink.addClass('hidden');
+      $editLink.removeClass('hidden');
+    }, 300); // Затримка 0.3 секунди (300 мілісекунд)
+  });
+
+  $('.my-classes__input').on('blur keypress', function (event) {
+    if (event.type === 'blur' || (event.type === 'keypress' && event.which === 13)) {
+      const $row = $(this).closest('.my-classes__row');
+      const $name = $row.find('.my-classes__name');
+      const $input = $(this);
+      const $editLink = $row.find('.my-classes__edit');
+      const $saveLink = $row.find('.my-classes__save');
+
+      $name.text($input.val().trim()).removeClass('hidden');
+      $input.addClass('hidden');
+      setTimeout(function () {
+        $saveLink.addClass('hidden');
+        $editLink.removeClass('hidden');
+      }, 300); // Затримка 0.3 секунди (300 мілісекунд)
+    }
+  });
+
+  $('.my-classes__input').on('focusout', function (event) {
+    const $row = $(this).closest('.my-classes__row');
+    const $name = $row.find('.my-classes__name');
+    const $input = $(this);
+    const $editLink = $row.find('.my-classes__edit');
+    const $saveLink = $row.find('.my-classes__save');
+
+    $name.text($input.val().trim()).removeClass('hidden');
+    $input.addClass('hidden');
+    setTimeout(function () {
+      $saveLink.addClass('hidden');
+      $editLink.removeClass('hidden');
+    }, 300); // Затримка 0.3 секунди (300 мілісекунд)
+  });
 });
 
-   // Збережемо поточний порядок сортування для кожного стовпця
-  // Збережемо стан до сортування для кожного стовпця
+// sort
+
   const sortStates = {
     ".my-classes__name": "none",
     ".my-classes__fault": "none",
@@ -107,29 +192,87 @@ $(document).ready(function () {
     sortList.call(this, ".my-classes__mark");
   });
 
+// sort end 
+// edit
 
+$(document).ready(function() {
+  let lastSaveClickTime = 0;
 
-  $(document).ready(function() {
-    $('.my-classes__edit').click(function(event) {
-      event.preventDefault();
+  $('.my-classes__edit').click(function(event) {
+    event.preventDefault();
+    const $row = $(this).closest('.my-classes__row');
+    const $name = $row.find('.my-classes__name');
+    const $input = $row.find('.my-classes__input');
+    const $editLink = $(this);
+    const $saveLink = $row.find('.my-classes__save');
+
+    $name.addClass('hidden');
+    $input.val($name.text().trim()).removeClass('hidden').focus();
+
+    if ($(window).width() >= 992) {
+      $editLink.addClass('hidden');
+      $saveLink.removeClass('hidden');
+    }
+  });
+
+  $('.my-classes__save').click(function(event) {
+    event.preventDefault();
+    const currentTime = new Date().getTime();
+    if (currentTime - lastSaveClickTime < 300) {
+      return;
+    }
+    lastSaveClickTime = currentTime;
+
+    const $row = $(this).closest('.my-classes__row');
+    const $name = $row.find('.my-classes__name');
+    const $input = $row.find('.my-classes__input');
+    const $editLink = $row.find('.my-classes__edit');
+    const $saveLink = $(this);
+
+    $name.text($input.val().trim()).removeClass('hidden');
+    $input.addClass('hidden');
+    setTimeout(function() {
+      $saveLink.addClass('hidden');
+      $editLink.removeClass('hidden');
+    }, 100); // Затримка 0.3 секунди (300 мілісекунд)
+  });
+
+  $('.my-classes__input').on('blur keypress', function(event) {
+    if (event.type === 'blur' || (event.type === 'keypress' && event.which === 13)) {
       const $row = $(this).closest('.my-classes__row');
       const $name = $row.find('.my-classes__name');
-      const $input = $row.find('.my-classes__input');
-      $name.addClass('hidden');
-      $input.val($name.text().trim()).removeClass('hidden').focus();
-    });
-  
-    $('.my-classes__input').on('blur keypress', function(event) {
-      if (event.type === 'blur' || (event.type === 'keypress' && event.which === 13)) {
-        const $row = $(this).closest('.my-classes__row');
-        const $name = $row.find('.my-classes__name');
-        const $input = $(this);
-        $name.text($input.val().trim()).removeClass('hidden');
-        $input.addClass('hidden');
-      }
-    });
+      const $input = $(this);
+      const $editLink = $row.find('.my-classes__edit');
+      const $saveLink = $row.find('.my-classes__save');
+
+      $name.text($input.val().trim()).removeClass('hidden');
+      $input.addClass('hidden');
+      setTimeout(function() {
+        $saveLink.addClass('hidden');
+        $editLink.removeClass('hidden');
+      }, 100); // Затримка 0.3 секунди (300 мілісекунд)
+    }
   });
-  
+
+  $('.my-classes__input').on('focusout', function(event) {
+    const $row = $(this).closest('.my-classes__row');
+    const $name = $row.find('.my-classes__name');
+    const $input = $(this);
+    const $editLink = $row.find('.my-classes__edit');
+    const $saveLink = $row.find('.my-classes__save');
+
+    $name.text($input.val().trim()).removeClass('hidden');
+    $input.addClass('hidden');
+    setTimeout(function() {
+      $saveLink.addClass('hidden');
+      $editLink.removeClass('hidden');
+    }, 100); // Затримка 0.3 секунди (300 мілісекунд)
+  });
+});
+
+
+  // edit end
+  // menu
   const myClasses = document.querySelectorAll('.sort');
   let activeElement = null;
   
@@ -157,3 +300,4 @@ $(document).ready(function () {
    closeButton.addEventListener("click", function () {
      mainMenu.classList.add("main-menu__hidden");
    });
+  // menu end

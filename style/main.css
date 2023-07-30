@@ -1215,12 +1215,18 @@ select:-webkit-autofill:focus {
 @media screen and (min-width: 992px) {
   .my-classes__subtitle {
     margin: 0;
+    font-size: 25px;
   }
 }
 .my-classes__list {
   display: flex;
   flex-direction: column;
   font-size: 12px;
+}
+@media screen and (min-width: 992px) {
+  .my-classes__list {
+    font-size: 16px;
+  }
 }
 .my-classes .my-classes__sort.spec.sorted-asc {
   stroke: #EC008C;
@@ -1264,7 +1270,7 @@ select:-webkit-autofill:focus {
     fill: #fff;
     stroke: #fff;
   }
-  .my-classes__row .my-classes__icon:hover {
+  .my-classes__row .my-classes__icon:active {
     background: #EC008C;
   }
 }
@@ -1372,7 +1378,6 @@ select:-webkit-autofill:focus {
   width: 11px;
   height: 11px;
   stroke: #C2D3DF;
-  transition: 0.3s ease all;
 }
 @media screen and (max-width: 991px) {
   .my-classes__edit-icon {
@@ -1383,7 +1388,6 @@ select:-webkit-autofill:focus {
   width: 11px;
   height: 12px;
   fill: #C2D3DF;
-  transition: 0.3s ease all;
 }
 @media screen and (max-width: 991px) {
   .my-classes__delete-icon {
@@ -1434,8 +1438,7 @@ select:-webkit-autofill:focus {
 .my-classes__button:active {
   background-color: #EC008C;
 }
-
-#backdrop {
+.my-classes__backdrop {
   position: fixed;
   z-index: 2;
   top: 0;
@@ -1450,12 +1453,15 @@ select:-webkit-autofill:focus {
   justify-content: center;
   align-items: center;
 }
-
-#backdrop:target {
+.my-classes .visible {
   transition: opacity 0.3s ease;
   pointer-events: auto;
   opacity: 1;
   overflow: scroll;
+}
+
+.hidden {
+  display: none;
 }
 
 .footer {
